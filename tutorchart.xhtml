@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"> 
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
+
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 190px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+			height: 1000px;
+		}
+		
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+			height: 1000px;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul a {
+			color: blue;
+			text-decoration: none;
+		}
+
+		header{
+			font-size: large;
+			padding: 0.3em;
+			background: #2E2E1F;
+		}
+
+		#left {
+			background: #E0E0D1;
+		}
+		
+		#right {
+			background: #F5F5F0;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+		img {
+    position: absolute;
+    right: 50px;
+    top: 15px;
+}
+		
+	</style>
+
+</h:head> 
+<body> 
+<header>
+<h1 style="color:white" align="center">Chart Menu
+<img src="Images/database.png" align="right" width="60" height="60"></img>
+</h1>
+</header>
+<div id="container">
+
+		<main id="center" class="column">
+			<article>
+			<f:view>
+				<h:form>
+				<h:panelGrid columns="2">
+				<t:selectOneMenu id="CourseList" value="#{chartBean.selectedcourse}"
+					action="#{loginBean.courseList}">
+					<t:selectItems value="#{loginBean.courseList}" />
+				</t:selectOneMenu>
+				<h:commandButton type="submit" value="Select assessment"
+					action="#{chartBean.retrieveAssessmentList}"
+					rendered="#{chartBean.courseRender}" />
+					<h:messages infoStyle="color:darkgreen"
+										errorStyle="color:darkred" />
+				<t:selectOneMenu id="AssessmentList"
+					value="#{chartBean.selectedassgment}"
+					rendered="#{chartBean.assessmentRender}"
+					action="#{chartBean.assessmentList}">
+					<t:selectItems value="#{chartBean.assessmentList}" />
+				</t:selectOneMenu>
+			</h:panelGrid>
+			
+	<h:commandButton value="pie Chart" type="submit" action="#{chart.piechart}"/>
+	<h:commandButton value="Bar Chart" type="submit" action="#{chart.barchart}"/>
+	<h:commandButton value="Numerical Analysis" type="submit" action="#{chart.numericalanalysis}"/>	
+	
+	<h:panelGrid columns="2" rendered="#{chart.numAnalysisRender}">
+				<h:outputLabel value="Min value:"></h:outputLabel>
+				<h:outputText value="#{chart.minValue}"></h:outputText>
+				<h:outputLabel value="Max value:"></h:outputLabel>
+				<h:outputText value="#{chart.maxValue}"></h:outputText>
+				<h:outputLabel value="Range:"></h:outputLabel>
+				<h:outputText value="#{chart.range}"></h:outputText>
+				<h:outputLabel value="Mean:"></h:outputLabel>
+				<h:outputText value="#{chart.mean}"></h:outputText>
+				<h:outputLabel value="Variance:"></h:outputLabel>
+				<h:outputText value="#{chart.variance}"></h:outputText>
+				<h:outputLabel value="Standard deviation:"></h:outputLabel>
+				<h:outputText value="#{chart.std}"></h:outputText>
+				<h:outputLabel value="Median:"></h:outputLabel>
+				<h:outputText value="#{chart.median}"></h:outputText>
+				<h:outputLabel value="First Quartile:"></h:outputLabel>
+				<h:outputText value="#{chart.q1}"></h:outputText>
+				<h:outputLabel value="Third Quartile:"></h:outputLabel>
+				<h:outputText value="#{chart.q3}"></h:outputText>
+				<h:outputLabel value="Interquartile Range:"></h:outputLabel>
+				<h:outputText value="#{chart.iqr}"></h:outputText>
+				</h:panelGrid>
+	
+   
+     
+    <h:graphicImage value="#{chart.finalPath}"  
+     rendered="#{chart.pierender}"
+     alt="xySeriesChart"/>
+     
+     <h:graphicImage value="#{chart.finalPath}"  	
+     rendered="#{chart.barrender}"
+     alt="xySeriesChart"/>	
+     
+     	
+     
+     
+       </h:form>
+     </f:view>
+			</article>								
+		</main>
+
+<nav id="left" class="column">
+			<h3>Tutor Actions</h3>
+			<ul>
+					<li><a href="tutorviewQuestions.xhtml">View Assessments</a></li>
+					<li><a href="tutorviewroster.xhtml">View Roster</a></li>
+					<li><a href="tutorchart.xhtml">View Reports</a></li>
+			</ul>
+		</nav>
+		
+<nav id="right" class="column">
+			<ul>
+					<li><a href="tutoractions.xhtml">Home</a></li>
+					<li><h:form><h:commandLink action="#{logout.logout}">Logout</h:commandLink></h:form></li>			
+			
+						</ul>
+			 			
+		</nav>
+
+	</div>
+</body> 
+</html>

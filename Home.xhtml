@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"> 
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
+
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 190px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+		
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul a {
+			color: blue;
+			text-decoration: none;
+		}
+
+		header{
+			font-size: large;
+			padding: 0.3em;
+			background: #2E2E1F;
+		}
+
+		#left {
+			background: #E0E0D1;
+		}
+		
+		#right {
+			background: #F5F5F0;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+		img {
+    position: absolute;
+    right: 50px;
+    top: 15px;
+}
+		
+	</style>
+
+</h:head> 
+<body> 
+<header>
+<h1 style="color:white" align="center">Home Menu
+<img src="Images/home.png" align="right" width="60" height="60"></img>
+</h1>
+</header>
+<div id="container">
+
+		<main id="center" class="column">
+			<article>
+			<p> You can Login as a normal user or as Admin for database access</p>			
+			</article>								
+		</main>
+
+<nav id="left" class="column">
+			<h3>Login Options</h3>
+			<ul>
+					<li><a href="login.xhtml">Login as Normal User</a></li>
+					<li><a href="dbactions.xhtml">Login as Admin</a></li>
+					<li><a href="Docs/F15G110_ProgrammersDocumentation.pdf">Programmers Documentation</a></li>
+					<li><a href="Docs/F15G110_UserManual.pdf">User Documentation</a></li>
+					<li><a href="Docs/adminmanual.pdf">Admin Documentation</a></li>
+			</ul>
+		</nav>
+		<nav id="right" class="column">
+			<ul>
+					<li><a href="dbLogin.xhtml">Logout</a></li>
+			</ul>
+		</nav>
+		
+		
+	</div>
+</body> 
+</html>

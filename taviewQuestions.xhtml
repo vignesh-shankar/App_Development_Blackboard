@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"> 
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
+
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 190px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+		
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul a {
+			color: blue;
+			text-decoration: none;
+		}
+
+		header{
+			font-size: large;
+			padding: 0.3em;
+			background: #2E2E1F;
+		}
+
+		#left {
+			background: #E0E0D1;
+		}
+		
+		#right {
+			background: #F5F5F0;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+		img {
+    position: absolute;
+    right: 50px;
+    top: 15px;
+}
+		
+	</style>
+ 
+</h:head>
+<header> 
+<h1 style="color:white" align="center">View Assessments
+<img src="Images/ques.jpg" align="right" width="60" height="60"></img>
+</h1>
+</header>
+<body>
+<div id="container">
+
+		<main id="center" class="column">
+			<article>
+<h:form>
+<h:panelGrid columns="2">
+<h:outputText value="Choose Course:" />
+<h:selectOneMenu value="#{displayAsssessment.selectedCourse}">
+<f:selectItems value="#{loginBean.courseList}" />
+</h:selectOneMenu>
+<h:commandButton id="upload"
+action= "#{displayAsssessment.generateList}"
+value="OK"/>
+<br/>
+<h:outputText value="Select the file:" />
+<h:selectOneMenu value="#{displayAsssessment.selectedFile}">
+<f:selectItems value="#{displayAsssessment.fileList}" />
+</h:selectOneMenu>
+<h:commandButton id="viewData"
+action= "#{displayAsssessment.fetchData}"
+value="View Data"/>
+<h:commandButton id="reset"
+action= "#{displayAsssessment.reset}"
+value="Reset"/>
+</h:panelGrid>
+</h:form>
+ <t:dataTable
+value="#{displayAsssessment.listFromDb}"
+var="rowNumber"
+rendered="#{displayAsssessment.dbrender}"
+border="1" cellspacing="0" cellpadding="1"
+columnClasses="columnClass1 border"
+headerClass="headerClass"
+footerClass="footerClass"
+rowClasses="rowClass2"
+styleClass="dataTableEx"
+width="800">
+<h:column>
+<f:facet name="header">
+<h:outputText>QNO</h:outputText>
+</f:facet>
+<h:outputText value="#{rowNumber.qNo}"/>
+</h:column>
+<h:column>
+<f:facet name="header">
+<h:outputText>Question</h:outputText>
+</f:facet>
+<h:outputText value="#{rowNumber.question}"/>
+</h:column>
+<h:column>
+<f:facet name="header">
+<h:outputText>Answer</h:outputText>
+</f:facet>
+<h:outputText value="#{rowNumber.answer}"/>
+</h:column>
+<h:column>
+<f:facet name="header">
+<h:outputText>Result</h:outputText>
+</f:facet>
+<h:outputText value="#{rowNumber.result}"/>
+</h:column>
+</t:dataTable>
+			
+			
+			</article>								
+		</main>
+
+<nav id="left" class="column">
+			<h3>TA Actions</h3>
+			<ul>
+					<li><a href="tauploadFile.xhtml">Upload Assessment</a></li>
+					<li><a href="tauploadroster.xhtml">Upload Roster</a></li>
+					<li><a href="taviewQuestions.xhtml">View Assessments</a></li>
+					<li><a href="taviewroster.xhtml">View Roster</a></li>
+
+			</ul>
+		</nav>
+		
+<nav id="right" class="column">
+			<ul>
+					<li><a href="taActions.xhtml">Home</a></li>
+					<li><h:form><h:commandLink action="#{logout.logout}">Logout</h:commandLink></h:form></li>
+			</ul>
+		</nav>
+
+	</div> 
+</body> 
+</html>

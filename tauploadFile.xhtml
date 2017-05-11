@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"> 
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
+
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 190px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+		
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul a {
+			color: blue;
+			text-decoration: none;
+		}
+
+		header{
+			font-size: large;
+			padding: 0.3em;
+			background: #2E2E1F;
+		}
+
+		#left {
+			background: #E0E0D1;
+		}
+		
+		#right {
+			background: #F5F5F0;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+		img {
+    position: absolute;
+    right: 50px;
+    top: 15px;
+}
+		
+	</style>
+
+</h:head>
+<header>
+<h1 style="color:white" align="center">Assessment Upload
+<img src="Images/exams.png" align="right" width="60" height="60"></img>
+</h1>
+</header> 
+<body> 
+<div id="container">
+
+		<main id="center" class="column">
+			<article>
+			<h:form id="form" enctype="multipart/form-data">
+<h:panelGrid>
+<h:outputLabel value="select file to upload:" style="font-weight:bold" />
+<t:inputFileUpload id="fileUpload"
+label="File to upload" style="font-weight:bold"
+storage="default"
+value="#{uploadFile.uploadedFile}"
+size="40"
+required="true"
+validatorMessage="This is a required field. Please select a file and then click on Submit"/>
+<br/>
+Choose the course:
+<h:selectOneMenu value="#{uploadFile.courseId}">
+<f:selectItems value="#{loginBean.courseList}" />
+</h:selectOneMenu>
+<br/>
+<h:outputLabel value="File Label:" style="font-weight:bold" />
+<h:inputText id="fileLabel"
+value= "#{uploadFile.fileLabel}"
+size="40" validatorMessage="Please enter alphanumerics without any special characters or blank spaces and then click on submit.">
+<f:validateRegex pattern="^[a-zA-Z0-9]*$" />
+</h:inputText>
+<h:message class="error" showDetails="false" for="fileLabel" style="color:red" />
+<h:message class="error" showDetails="false" for="fileUpload" style="color:red" />
+<h:outputLabel value=" "/>
+<h:commandButton id="upload"
+action= "#{uploadFile.processFileUpload}"
+value="Submit"/>
+</h:panelGrid>
+<h:outputText value="#{uploadFile.finalMsg}" style="color:red" />
+<br/>
+<h:outputText value="#{uploadFile.successMsg}" style="color:green" />
+</h:form>
+
+		</article>								
+		</main>
+
+<nav id="left" class="column">
+			<h3>TA Actions</h3>
+			<ul>
+					<li><a href="tauploadFile.xhtml">Upload Assessment</a></li>
+					<li><a href="tauploadroster.xhtml">Upload Roster</a></li>
+					<li><a href="taviewQuestions.xhtml">View Assessments</a></li>
+					<li><a href="taviewroster.xhtml">View Roster</a></li>
+
+			</ul>
+		</nav>
+		
+<nav id="right" class="column">
+			<ul>
+					<li><a href="taActions.xhtml">Home</a></li>
+					<li><h:form><h:commandLink action="#{logout.logout}">Logout</h:commandLink></h:form></li>
+			</ul>
+		</nav>
+
+	</div>
+
+</body> 
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"> 
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
+
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 190px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+		
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul a {
+			color: blue;
+			text-decoration: none;
+		}
+
+		header{
+			font-size: large;
+			padding: 0.3em;
+			background: #2E2E1F;
+		}
+
+		#left {
+			background: #E0E0D1;
+		}
+		
+		#right {
+			background: #F5F5F0;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+		img {
+    position: absolute;
+    right: 50px;
+    top: 15px;
+}
+		
+	</style>
+
+</h:head> 
+<body> 
+<header>
+<h1 style="color:white" align="center">Admin Menu
+<img src="Images/database.png" align="right" width="60" height="60"></img>
+</h1>
+</header>
+<div id="container">
+
+		<main id="center" class="column">
+			<article>
+			<f:view>
+				<h:form>
+			<t:dataTable
+value="#{loginBean.trackList}"
+var="rowNumber"
+rendered="#{loginBean.trackrender}"
+border="1" cellspacing="0" cellpadding="1"
+headerClass="headerClass"
+footerClass="footerClass"
+rowClasses="rowClass2"
+styleClass="dataTableEx"
+width="800">
+<h:column>
+<f:facet name="header">
+<h:outputText>UserID</h:outputText>
+</f:facet>
+<h:outputText value="#{rowNumber.userID}"/>
+</h:column>
+<h:column>
+<f:facet name="header">
+<h:outputText>Type</h:outputText>
+</f:facet>
+<h:outputText value="#{rowNumber.type}"/>
+</h:column>
+<h:column>
+<f:facet name="header">
+<h:outputText>TimeStamp</h:outputText>
+</f:facet>
+<h:outputText value="#{rowNumber.timestamp}"/>
+</h:column>
+<h:column>
+<f:facet name="header">
+<h:outputText>IP Address</h:outputText>
+</f:facet>
+<h:outputText value="#{rowNumber.ip}"/>
+</h:column>
+</t:dataTable>
+			
+			
+	
+	 
+       </h:form>
+     </f:view>
+			</article>								
+		</main>
+
+<nav id="left" class="column">
+			<h3>Admin Actions</h3>
+			<ul>
+			<li><a href="createtable.xhtml">Create Application Tables</a></li>
+			<li><a href="droptable.xhtml">Drop Application Tables</a></li>
+			<li><a href="studentreg.xhtml">Student Registration</a></li>
+			<li><a href="otherreg.xhtml">Other User Registration</a></li>
+			<h:form>
+			<li><h:commandLink id="course" action="#{registration.generateLists}">Course Registration</h:commandLink></li>
+			<li><h:commandLink id="track" action="#{loginBean.viewtrack}">View User Log</h:commandLink></li>
+			</h:form>
+			</ul>
+		</nav>
+		
+<nav id="right" class="column">
+			<ul>
+					<li><a href="dbactions.xhtml">Home</a></li>
+					<li><h:form><h:commandLink action="#{logout.logout}">Logout</h:commandLink></h:form></li>
+								
+						</ul>
+			 			
+		</nav>
+
+	</div>
+</body> 
+</html>

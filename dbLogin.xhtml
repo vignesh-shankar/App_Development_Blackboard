@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
+
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 190px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+		
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul a {
+			color: blue;
+			text-decoration: none;
+		}
+
+		header{
+			font-size: large;
+			padding: 0.3em;
+			background: #2E2E1F;
+		}
+
+		#left {
+			background: #E0E0D1;
+		}
+		
+		#right {
+			background: #F5F5F0;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+		img {
+    position: absolute;
+    right: 50px;
+    top: 15px;
+}
+		
+	</style>
+  
+</h:head> 
+<body>
+<header>
+<h1 style="color:white" align="center">Admin Login
+<img src="Images/database.png" align="right" width="60" height="60"></img>
+</h1>
+</header>
+ <div id="container">
+
+		<main id="center" class="column">
+			<article>
+			
+	<h:form>
+    <h:panelGrid>
+        <h:outputLabel value="Username: " style="font-weight:bold" />
+        <h:inputText id = "userName" value="#{databaseLoginBean.userName}" />
+        <h:outputLabel value="Password: " style="font-weight:bold" />
+        <h:inputSecret id = "password" value="#{databaseLoginBean.password}" redisplay="true"/>
+        <h:outputLabel value="DB Host " style="font-weight:bold" />
+        <h:selectOneMenu value="#{databaseLoginBean.hostName}">
+   	<f:selectItem itemValue="54" itemLabel="54" />
+   	<f:selectItem itemValue="57" itemLabel="57" />
+   	<f:selectItem itemValue="localhost" itemLabel="localhost" />
+   </h:selectOneMenu>
+   <h:selectOneMenu value="#{databaseLoginBean.database}">
+   	<f:selectItem itemValue="mysql" itemLabel="mysql" />
+   	<f:selectItem itemValue="DB2" itemLabel="DB2" />
+   	  	<f:selectItem itemValue="Oracle" itemLabel="Oracle" />
+   </h:selectOneMenu>
+   <h:outputLabel value="DB Schema " style="font-weight:bold" />
+   <h:inputText id = "dbschema" value="#{databaseLoginBean.dbschema}" />
+        <h:messages infoStyle="color:red"
+										errorStyle="color:darkred" />
+	
+        <h:commandButton value="Login" type="submit" action="#{databaseLoginBean.login}" />
+    </h:panelGrid>
+</h:form>
+	</article>								
+		</main>
+		<nav id="left" class="column">
+			<h3>Database Actions</h3>
+			
+		</nav>
+		
+<nav id="right" class="column">
+			<ul>
+					
+			</ul>
+		</nav>
+		</div>
+</body> 
+</html>
